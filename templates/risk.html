@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestão de risco | Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>ATLAS</strong>
+                        <span>OPERATING SYSTEM</span>
+                    </div>
+                </div>
+
+                <nav class="menu">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        Dashboard
+                    </a>
+
+                    <a href="/operacoes">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Operações
+                    </a>
+
+                    <a href="/mercados">
+                        <i class="bi bi-activity"></i>
+                        Mercado
+                    </a>
+
+                    <a href="/atlas-ai">
+                        <i class="bi bi-stars"></i>
+                        Atlas AI
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-award-fill"></i>
+                        Atlas Score
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        Estratégias
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        Analytics
+                    </a>
+
+                    <a href="/risco" class="active">
+                        <i class="bi bi-shield-check"></i>
+                        Gestão de risco
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-online">
+                    <span></span>
+                    Atlas Core online
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <span class="eyebrow">CONTROLE OPERACIONAL</span>
+                    <h1>Gestão de risco</h1>
+                    <p>Indicadores informativos da exposição atual da operação.</p>
+                </div>
+
+                <div class="topbar-status">
+                    <span><i></i> OKX</span>
+                    <span><i></i> API</span>
+                    <span><i></i> IA</span>
+
+                    <div class="clock">
+                        <i class="bi bi-clock"></i>
+                        <span id="risk-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content">
+                <section class="panel risk-status-panel">
+                    <div class="risk-status-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <div>
+                        <span class="eyebrow">STATUS ATUAL</span>
+                        <h2 id="risk-status-title">Carregando status operacional...</h2>
+                        <p id="risk-status-description">
+                            Consultando margem, exposição e concentração.
+                        </p>
+                    </div>
+
+                    <span id="risk-status-badge" class="risk-status-badge">
+                        CARREGANDO
+                    </span>
+                </section>
+
+                <div class="risk-metrics-grid">
+                    <article class="risk-metric-card">
+                        <span>Margem utilizada</span>
+                        <strong id="risk-margin">--</strong>
+                        <small>Percentual do patrimônio</small>
+                    </article>
+
+                    <article class="risk-metric-card">
+                        <span>Exposição total</span>
+                        <strong id="risk-exposure">--</strong>
+                        <small>Capital nocional em posições</small>
+                    </article>
+
+                    <article class="risk-metric-card">
+                        <span>Maior concentração</span>
+                        <strong id="risk-concentration">--</strong>
+                        <small>Participação da maior posição</small>
+                    </article>
+
+                    <article class="risk-metric-card">
+                        <span>Posições abertas</span>
+                        <strong id="risk-positions">--</strong>
+                        <small>Operações monitoradas</small>
+                    </article>
+                </div>
+
+                <div class="risk-grid">
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">MAIOR EXPOSIÇÃO</span>
+                                <h2>Posição concentrada</h2>
+                            </div>
+                        </div>
+
+                        <div class="risk-position-detail">
+                            <strong id="risk-exposure-asset">--</strong>
+
+                            <div>
+                                <span>Direção</span>
+                                <b id="risk-exposure-side">--</b>
+                            </div>
+
+                            <div>
+                                <span>Exposição</span>
+                                <b id="risk-exposure-value">--</b>
+                            </div>
+
+                            <div>
+                                <span>Margem</span>
+                                <b id="risk-exposure-margin">--</b>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">MAIOR PERDA EM ABERTO</span>
+                                <h2>Posição sob atenção</h2>
+                            </div>
+                        </div>
+
+                        <div class="risk-position-detail">
+                            <strong id="risk-loss-asset">--</strong>
+
+                            <div>
+                                <span>Direção</span>
+                                <b id="risk-loss-side">--</b>
+                            </div>
+
+                            <div>
+                                <span>P/L atual</span>
+                                <b id="risk-loss-value">--</b>
+                            </div>
+
+                            <div>
+                                <span>ROI atual</span>
+                                <b id="risk-loss-roi">--</b>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="panel risk-notice">
+                    <i class="bi bi-info-circle"></i>
+
+                    <p>
+                        Este painel é informativo e mostra métricas atuais da conta.
+                        Ele não executa operações nem constitui recomendação financeira.
+                    </p>
+
+                    <span id="risk-last-update">Aguardando dados</span>
+                </section>
+
+                <footer class="page-footer">
+                    <span>
+                        <i></i>
+                        Dados sincronizados com a Trading Account da OKX
+                    </span>
+
+                    <span>Atlas OS · Risk Monitoring</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/risk.js"></script>
+</body>
+</html>

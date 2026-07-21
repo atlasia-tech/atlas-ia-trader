@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Operações — Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div>
+                <a class="brand" href="/">
+                    <span class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </span>
+
+                    <span>
+                        <strong>ATLAS</strong>
+                        <small>Operating System</small>
+                    </span>
+                </a>
+
+                <nav class="menu" aria-label="Menu principal">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="/operacoes" class="active">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                        <span>Operações</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-activity"></i>
+                        <span>Mercado</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-stars"></i>
+                        <span>Atlas AI</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-award-fill"></i>
+                        <span>Atlas Score</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        <span>Estratégias</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        <span>Analytics</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Gestão de risco</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="online"></span>
+                    <span>Atlas Core online</span>
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div class="page-heading">
+                    <p class="eyebrow">OKX · POSIÇÕES EM TEMPO REAL</p>
+                    <h1>Operações abertas</h1>
+                    <p class="page-subtitle">
+                        Monitoramento detalhado das posições da Trading Account.
+                    </p>
+                </div>
+
+                <div class="topbar-actions">
+                    <div class="health-status">
+                        <span class="health-item">
+                            <i class="bi bi-circle-fill"></i>
+                            OKX
+                        </span>
+
+                        <span class="health-item">
+                            <i class="bi bi-circle-fill"></i>
+                            API
+                        </span>
+
+                        <span class="health-item">
+                            <i class="bi bi-circle-fill"></i>
+                            IA
+                        </span>
+                    </div>
+
+                    <div class="clock-box">
+                        <i class="bi bi-clock"></i>
+                        <span id="operations-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content">
+                <section class="metrics-grid">
+                    <article class="metric-card">
+                        <div class="metric-icon">
+                            <i class="bi bi-layers"></i>
+                        </div>
+
+                        <div>
+                            <p>Posições abertas</p>
+                            <h2 id="total-positions">—</h2>
+                            <span class="metric-note">Monitoradas pela OKX</span>
+                        </div>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon metric-icon-long">
+                            <i class="bi bi-arrow-up-right"></i>
+                        </div>
+
+                        <div>
+                            <p>Exposição total</p>
+                            <h2 id="total-exposure">—</h2>
+                            <span class="metric-note">Valor nocional em USDT</span>
+                        </div>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon metric-icon-risk">
+                            <i class="bi bi-shield-fill-check"></i>
+                        </div>
+
+                        <div>
+                            <p>Margem utilizada</p>
+                            <h2 id="used-margin">—</h2>
+                            <span class="metric-note">Margem inicial das posições</span>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="panel operations-page-panel">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">PORTFÓLIO ATUAL</p>
+                            <h3>Todas as posições</h3>
+                        </div>
+
+                        <div class="operations-filter">
+                            <i class="bi bi-search"></i>
+                            <input
+                                id="operations-search"
+                                type="search"
+                                placeholder="Filtrar por ativo ou lado"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="atlas-table operations-table">
+                            <thead>
+                                <tr>
+                                    <th>Ativo</th>
+                                    <th>Lado</th>
+                                    <th>Alavancagem</th>
+                                    <th>Entrada</th>
+                                    <th>Atual</th>
+                                    <th>Margem</th>
+                                    <th>Exposição</th>
+                                    <th>P/L</th>
+                                    <th>ROI</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="operations-table-body">
+                                <tr class="table-empty-state">
+                                    <td colspan="9">
+                                        <i class="bi bi-arrow-repeat"></i>
+                                        Carregando posições da OKX...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <footer class="dashboard-footer">
+                    <span>
+                        <i class="bi bi-circle-fill"></i>
+                        Posições sincronizadas com a OKX
+                    </span>
+
+                    <span id="operations-last-update">
+                        Última atualização: aguardando dados
+                    </span>
+
+                    <span>Atlas OS · Trading Operations</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/operations.js"></script>
+</body>
+</html>

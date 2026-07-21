@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Atlas OS — Central de Comando</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div
+        class="app"
+        id="atlas-app"
+        data-patrimonio="{{ patrimonio }}"
+        data-lucro-total="{{ lucro_total }}"
+        data-longs="{{ longs }}"
+        data-shorts="{{ shorts }}"
+        data-risco="{{ risco }}"
+    >
+        <aside class="sidebar">
+            <div>
+                <a class="brand" href="/">
+                    <span class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </span>
+
+                    <span>
+                        <strong>ATLAS</strong>
+                        <small>Operating System</small>
+                    </span>
+                </a>
+
+                <nav class="menu" aria-label="Menu principal">
+                    <a href="/" class="active">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="#operacoes">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                        <span>Operações</span>
+                    </a>
+
+                    <a href="#mercado">
+                        <i class="bi bi-activity"></i>
+                        <span>Mercado</span>
+                    </a>
+
+                    <a href="#atlas-ai">
+                        <i class="bi bi-stars"></i>
+                        <span>Atlas AI</span>
+                    </a>
+
+                    <a href="#score">
+                        <i class="bi bi-award-fill"></i>
+                        <span>Atlas Score</span>
+                    </a>
+
+                    <a href="#estrategias">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        <span>Estratégias</span>
+                    </a>
+
+                    <a href="#analytics">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        <span>Analytics</span>
+                    </a>
+
+                    <a href="#risco">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Gestão de risco</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="online"></span>
+                    <span>Atlas Core online</span>
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div class="page-heading">
+                    <p class="eyebrow">CENTRAL DE COMANDO</p>
+                    <h1>Dashboard</h1>
+                    <p class="page-subtitle">Sua operação algorítmica em tempo real.</p>
+                </div>
+
+                <div class="topbar-actions">
+                    <div class="health-status">
+                        <span class="health-item">
+                            <i class="bi bi-circle-fill"></i>
+                            OKX
+                        </span>
+
+                        <span class="health-item">
+                            <i class="bi bi-circle-fill"></i>
+                            API
+                        </span>
+
+                        <span class="health-item">
+                            <i class="bi bi-circle-fill"></i>
+                            IA
+                        </span>
+                    </div>
+
+                    <div class="clock-box">
+                        <i class="bi bi-clock"></i>
+                        <span id="atlas-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content">
+                <section class="metrics-grid" aria-label="Resumo financeiro">
+                    <article class="metric-card metric-card-primary">
+                        <div class="metric-icon">
+                            <i class="bi bi-wallet2"></i>
+                        </div>
+
+                        <div>
+                            <p>Patrimônio total</p>
+                            <h2>US$ {{ patrimonio }}</h2>
+                            <span class="metric-note">
+                                <i class="bi bi-arrow-repeat"></i>
+                                Trading Account OKX
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon metric-icon-profit">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+
+                        <div>
+                            <p>P/L em aberto</p>
+                            <h2 id="lucro-total">{{ lucro_total }} USDT</h2>
+                            <span class="metric-note">Posições em tempo real</span>
+                        </div>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon metric-icon-long">
+                            <i class="bi bi-arrow-up-right"></i>
+                        </div>
+
+                        <div>
+                            <p>Posições long</p>
+                            <h2>{{ longs }}</h2>
+                            <span class="metric-note">Exposição comprada</span>
+                        </div>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon metric-icon-short">
+                            <i class="bi bi-arrow-down-right"></i>
+                        </div>
+
+                        <div>
+                            <p>Posições short</p>
+                            <h2>{{ shorts }}</h2>
+                            <span class="metric-note">Exposição vendida</span>
+                        </div>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon metric-icon-risk">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <div>
+                            <p>Nível de risco</p>
+                            <h2 class="risk-value">{{ risco }}</h2>
+                            <span class="metric-note">Avaliação do Atlas Core</span>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="workspace-grid">
+                    <article class="panel chart-panel" id="mercado">
+                        <div class="panel-header">
+                            <div>
+                                <p class="eyebrow">PERFORMANCE</p>
+                                <h3>Curva do patrimônio</h3>
+                            </div>
+
+                            <button class="panel-action" type="button" disabled>
+                                <i class="bi bi-calendar3"></i>
+                                Em breve
+                            </button>
+                        </div>
+
+                        <div class="chart-area">
+                            <canvas id="equity-chart"></canvas>
+
+                            <div class="chart-empty-state">
+                                <i class="bi bi-graph-up"></i>
+                                <p>O histórico de patrimônio será exibido aqui.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="panel score-panel" id="score">
+                        <div class="panel-header">
+                            <div>
+                                <p class="eyebrow">SAÚDE OPERACIONAL</p>
+                                <h3>Atlas Score</h3>
+                            </div>
+
+                            <i class="bi bi-award-fill panel-header-icon"></i>
+                        </div>
+
+                        <div class="score-content">
+                            <div class="score-ring">
+                                <span>--</span>
+                                <small>EM BREVE</small>
+                            </div>
+
+                            <p>
+                                O score combinará risco, exposição, diversificação,
+                                margem e comportamento das estratégias.
+                            </p>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="workspace-grid workspace-grid-secondary">
+                    <article class="panel operations-panel" id="operacoes">
+                        <div class="panel-header">
+                            <div>
+                                <p class="eyebrow">OKX · SWAPS</p>
+                                <h3>Operações abertas</h3>
+                            </div>
+
+                            <a href="#operacoes" class="panel-link">
+                                Ver detalhes
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="atlas-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ativo</th>
+                                        <th>Lado</th>
+                                        <th>Entrada</th>
+                                        <th>Atual</th>
+                                        <th>P/L</th>
+                                        <th>ROI</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="positions-table-body">
+                                    <tr class="table-empty-state">
+                                        <td colspan="6">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                            As posições serão carregadas pelo Atlas Core.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="panel ai-panel" id="atlas-ai">
+                        <div class="panel-header">
+                            <div>
+                                <p class="eyebrow">COPILOTO OPERACIONAL</p>
+                                <h3>Atlas AI</h3>
+                            </div>
+
+                            <span class="ai-status">
+                                <span class="online"></span>
+                                Ativa
+                            </span>
+                        </div>
+
+                        <div class="ai-message">
+                            <div class="ai-avatar">
+                                <i class="bi bi-stars"></i>
+                            </div>
+
+                            <div>
+                                <p class="ai-greeting">Diagnóstico inicial</p>
+                                <p>
+                                    O Atlas está conectado à OKX e monitorando sua
+                                    conta de trading. A análise detalhada de posições,
+                                    margem e exposição aparecerá aqui.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="ai-insights">
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>API autenticada e operacional.</span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>Posições e patrimônio sincronizados.</span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-hourglass-split"></i>
+                                <span>Atlas Score em preparação.</span>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <footer class="dashboard-footer">
+                    <span>
+                        <i class="bi bi-circle-fill"></i>
+                        Sistema operacional
+                    </span>
+
+                    <span id="last-update">
+                        Última atualização: aguardando dados
+                    </span>
+
+                    <span>Atlas OS · Intelligence for Algorithmic Trading</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

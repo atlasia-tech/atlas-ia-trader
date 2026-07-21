@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@import "variables.css";
+@import "layout.css";
+@import "sidebar.css";
+@import "topbar.css";
+@import "cards.css";
+@import "panels.css";
+@import "tables.css";
+@import "widgets.css";
+@import "market.css";
+@import "ai.css";
+@import "risk.css";
+@import "analytics.css";
+@import "responsive.css";

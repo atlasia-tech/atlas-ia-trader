@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Atlas AI | Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>ATLAS</strong>
+                        <span>OPERATING SYSTEM</span>
+                    </div>
+                </div>
+
+                <nav class="menu">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        Dashboard
+                    </a>
+
+                    <a href="/operacoes">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Operações
+                    </a>
+
+                    <a href="/mercados">
+                        <i class="bi bi-activity"></i>
+                        Mercado
+                    </a>
+
+                    <a href="/atlas-ai" class="active">
+                        <i class="bi bi-stars"></i>
+                        Atlas AI
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-award-fill"></i>
+                        Atlas Score
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        Estratégias
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        Analytics
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-shield-check"></i>
+                        Gestão de risco
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-online">
+                    <span></span>
+                    Atlas Core online
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <span class="eyebrow">COPILOTO OPERACIONAL</span>
+                    <h1>Atlas AI</h1>
+                    <p>Leitura informativa da saúde atual da sua operação.</p>
+                </div>
+
+                <div class="topbar-status">
+                    <span><i></i> OKX</span>
+                    <span><i></i> API</span>
+                    <span><i></i> IA</span>
+
+                    <div class="clock">
+                        <i class="bi bi-clock"></i>
+                        <span id="ai-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content">
+                <section class="panel ai-hero-panel">
+                    <div class="ai-hero-icon">
+                        <i class="bi bi-stars"></i>
+                    </div>
+
+                    <div>
+                        <span class="eyebrow">DIAGNÓSTICO ATUAL</span>
+                        <h2 id="ai-title">Atlas AI analisando a operação...</h2>
+                        <p id="ai-description">
+                            Carregando dados de risco, margem e exposição.
+                        </p>
+                    </div>
+
+                    <div class="ai-hero-status">
+                        <span class="live-label">
+                            <span></span>
+                            Monitoramento ativo
+                        </span>
+                    </div>
+                </section>
+
+                <div class="ai-grid">
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">SAÚDE OPERACIONAL</span>
+                                <h2>Atlas Score</h2>
+                            </div>
+                        </div>
+
+                        <div class="ai-score-content">
+                            <div id="ai-score-ring" class="score-ring">
+                                <strong id="ai-score">--</strong>
+                                <small id="ai-score-status">CARREGANDO</small>
+                            </div>
+
+                            <p id="ai-score-description">
+                                Aguardando a avaliação operacional.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">EXPOSIÇÃO</span>
+                                <h2>Indicadores da conta</h2>
+                            </div>
+                        </div>
+
+                        <div class="ai-indicators">
+                            <div>
+                                <span>Margem utilizada</span>
+                                <strong id="ai-margin">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Exposição total</span>
+                                <strong id="ai-exposure">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Maior concentração</span>
+                                <strong id="ai-concentration">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Nível de risco</span>
+                                <strong id="ai-risk">--</strong>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">LEITURA DAS POSIÇÕES</span>
+                            <h2>Destaques da operação</h2>
+                        </div>
+
+                        <span id="ai-last-update" class="muted-text">
+                            Aguardando dados
+                        </span>
+                    </div>
+
+                    <div class="ai-highlights">
+                        <article class="ai-highlight positive">
+                            <span><i class="bi bi-arrow-up-right"></i> Melhor resultado</span>
+                            <strong id="ai-best-asset">--</strong>
+                            <small id="ai-best-details">Carregando</small>
+                        </article>
+
+                        <article class="ai-highlight negative">
+                            <span><i class="bi bi-arrow-down-right"></i> Maior perda em aberto</span>
+                            <strong id="ai-worst-asset">--</strong>
+                            <small id="ai-worst-details">Carregando</small>
+                        </article>
+
+                        <article class="ai-highlight neutral">
+                            <span><i class="bi bi-layers"></i> Maior exposição</span>
+                            <strong id="ai-exposure-asset">--</strong>
+                            <small id="ai-exposure-details">Carregando</small>
+                        </article>
+                    </div>
+                </section>
+
+                <footer class="page-footer">
+                    <span>
+                        <i></i>
+                        Análise informativa baseada nos dados atuais da OKX
+                    </span>
+
+                    <span>Atlas OS · AI Copilot</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/ai.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics | Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>ATLAS</strong>
+                        <span>OPERATING SYSTEM</span>
+                    </div>
+                </div>
+
+                <nav class="menu">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        Dashboard
+                    </a>
+
+                    <a href="/operacoes">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Operações
+                    </a>
+
+                    <a href="/mercados">
+                        <i class="bi bi-activity"></i>
+                        Mercado
+                    </a>
+
+                    <a href="/atlas-ai">
+                        <i class="bi bi-stars"></i>
+                        Atlas AI
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-award-fill"></i>
+                        Atlas Score
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        Estratégias
+                    </a>
+
+                    <a href="/analytics" class="active">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        Analytics
+                    </a>
+
+                    <a href="/risco">
+                        <i class="bi bi-shield-check"></i>
+                        Gestão de risco
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-online">
+                    <span></span>
+                    Atlas Core online
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <span class="eyebrow">ANÁLISE DE DESEMPENHO</span>
+                    <h1>Analytics</h1>
+                    <p>Histórico e métricas informativas da operação.</p>
+                </div>
+
+                <div class="topbar-status">
+                    <span><i></i> OKX</span>
+                    <span><i></i> API</span>
+                    <span><i></i> IA</span>
+
+                    <div class="clock">
+                        <i class="bi bi-clock"></i>
+                        <span id="analytics-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content">
+                <div class="analytics-metrics-grid">
+                    <article class="analytics-metric-card">
+                        <span>Patrimônio atual</span>
+                        <strong id="analytics-equity">--</strong>
+                        <small>Trading Account OKX</small>
+                    </article>
+
+                    <article class="analytics-metric-card">
+                        <span>P/L em aberto</span>
+                        <strong id="analytics-pnl">--</strong>
+                        <small>Resultado das posições abertas</small>
+                    </article>
+
+                    <article class="analytics-metric-card">
+                        <span>Exposição atual</span>
+                        <strong id="analytics-exposure">--</strong>
+                        <small>Capital nocional em posições</small>
+                    </article>
+
+                    <article class="analytics-metric-card">
+                        <span>Snapshots salvos</span>
+                        <strong id="analytics-snapshots">--</strong>
+                        <small>Histórico local do Atlas</small>
+                    </article>
+                </div>
+
+                <section class="panel analytics-chart-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">EVOLUÇÃO LOCAL</span>
+                            <h2>Curva do patrimônio</h2>
+                        </div>
+
+                        <span id="analytics-last-update" class="muted-text">
+                            Aguardando dados
+                        </span>
+                    </div>
+
+                    <div class="analytics-chart-wrap">
+                        <canvas id="analytics-equity-chart"></canvas>
+                    </div>
+                </section>
+
+                <div class="analytics-grid">
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">COMPOSIÇÃO</span>
+                                <h2>Posições abertas</h2>
+                            </div>
+                        </div>
+
+                        <div class="analytics-position-summary">
+                            <div>
+                                <span>Longs</span>
+                                <strong id="analytics-longs">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Shorts</span>
+                                <strong id="analytics-shorts">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Total</span>
+                                <strong id="analytics-total-positions">--</strong>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">SAÚDE OPERACIONAL</span>
+                                <h2>Atlas Score</h2>
+                            </div>
+                        </div>
+
+                        <div class="analytics-score-row">
+                            <div id="analytics-score-ring" class="analytics-score-ring">
+                                <strong id="analytics-score">--</strong>
+                                <small id="analytics-score-status">CARREGANDO</small>
+                            </div>
+
+                            <p id="analytics-score-description">
+                                Aguardando avaliação operacional.
+                            </p>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="panel analytics-note">
+                    <i class="bi bi-info-circle"></i>
+
+                    <p>
+                        Os dados exibidos são históricos locais e métricas atuais da
+                        Trading Account. O painel é informativo e não executa operações.
+                    </p>
+                </section>
+
+                <footer class="page-footer">
+                    <span>
+                        <i></i>
+                        Histórico local sincronizado pelo Atlas Core
+                    </span>
+
+                    <span>Atlas OS · Performance Analytics</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/analytics.js"></script>
+</body>
+</html>

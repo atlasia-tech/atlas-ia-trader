@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mercado | Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>ATLAS</strong>
+                        <span>OPERATING SYSTEM</span>
+                    </div>
+                </div>
+
+                <nav class="menu">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        Dashboard
+                    </a>
+
+                    <a href="/operacoes">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Operações
+                    </a>
+
+                    <a href="/mercados" class="active">
+                        <i class="bi bi-activity"></i>
+                        Mercado
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-stars"></i>
+                        Atlas AI
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-award-fill"></i>
+                        Atlas Score
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        Estratégias
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        Analytics
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-shield-check"></i>
+                        Gestão de risco
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-online">
+                    <span></span>
+                    Atlas Core online
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <span class="eyebrow">OKX · DADOS PÚBLICOS</span>
+                    <h1>Visão de mercado</h1>
+                    <p>Monitoramento das principais criptomoedas em tempo real.</p>
+                </div>
+
+                <div class="topbar-status">
+                    <span><i></i> OKX</span>
+                    <span><i></i> API</span>
+                    <span><i></i> IA</span>
+
+                    <div class="clock">
+                        <i class="bi bi-clock"></i>
+                        <span id="market-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">MERCADOS PRINCIPAIS</span>
+                        <h2>Panorama cripto</h2>
+                    </div>
+
+                    <span class="live-label">
+                        <span></span>
+                        Atualização automática
+                    </span>
+                </div>
+
+                <div id="market-cards" class="market-grid">
+                    <div class="market-loading">
+                        <i class="bi bi-arrow-repeat"></i>
+                        Carregando cotações da OKX...
+                    </div>
+                </div>
+
+                <section class="panel market-summary-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">LEITURA OPERACIONAL</span>
+                            <h2>Resumo do mercado</h2>
+                        </div>
+
+                        <span id="market-last-update" class="muted-text">
+                            Aguardando dados
+                        </span>
+                    </div>
+
+                    <div id="market-summary" class="market-summary">
+                        <div class="market-loading">
+                            Preparando leitura de mercado...
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="page-footer">
+                    <span>
+                        <i></i>
+                        Dados públicos sincronizados com a OKX
+                    </span>
+
+                    <span>Atlas OS · Market Intelligence</span>
+                </footer>
+
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/market.js"></script>
+</body>
+</html>

@@ -216,3 +216,33 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Credenciais e configurações privadas
+.env
+.env.*
+!.env.example
+
+# Ambientes virtuais Python
+.venv/
+venv/
+env/
+
+# Cache e arquivos Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Banco de dados local e histórico da conta
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,46 @@
+/* ===================================================
+   ATLAS OS - VARIABLES
+   =================================================== */
+
+:root{
+
+    /* ========= COLORS ========= */
+
+    --bg-main: #080B12;
+    --bg-sidebar: #0F172A;
+    --bg-card: #141D2E;
+    --bg-card-hover:#1A2740;
+
+    --border-color:#243247;
+
+    --primary:#3B82F6;
+    --primary-hover:#60A5FA;
+
+    --success:#22C55E;
+    --warning:#F59E0B;
+    --danger:#EF4444;
+
+    --text:#F8FAFC;
+    --text-secondary:#94A3B8;
+
+    /* ========= SIZES ========= */
+
+    --sidebar-width:260px;
+
+    --topbar-height:72px;
+
+    --card-radius:18px;
+
+    --transition:.25s ease;
+
+    --shadow:
+        0 10px 25px rgba(0,0,0,.35);
+
+    /* ========= FONT ========= */
+
+    --font:
+        "Inter",
+        "Segoe UI",
+        sans-serif;
+
+}

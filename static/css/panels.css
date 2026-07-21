@@ -1,0 +1,240 @@
+.workspace-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, .8fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.workspace-grid-secondary {
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr);
+}
+
+.panel {
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    background: linear-gradient(145deg, #141f30, #101827);
+    box-shadow: var(--shadow);
+    padding: 22px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.panel-header h3 {
+    margin: 4px 0 0;
+    color: #fff;
+    font-weight: 700;
+}
+
+.panel-header-icon {
+    color: #fbbf24;
+    font-size: 22px;
+}
+
+.panel-action,
+.panel-link {
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.panel-link {
+    color: #60a5fa;
+    font-weight: 700;
+}
+
+.chart-area {
+    position: relative;
+    min-height: 300px;
+    border: 1px dashed #2a3c58;
+    border-radius: 14px;
+    background: radial-gradient(circle at top right, rgba(59, 130, 246, .10), transparent 42%), #0c1421;
+}
+
+.chart-area canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+.chart-empty-state {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    text-align: center;
+    pointer-events: none;
+}
+
+.chart-empty-state i {
+    color: var(--primary);
+    font-size: 28px;
+}
+
+.chart-empty-state p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.score-content {
+    display: grid;
+    place-items: center;
+    gap: 18px;
+    text-align: center;
+}
+
+.score-ring {
+    width: 132px;
+    height: 132px;
+    display: grid;
+    place-content: center;
+    border: 9px solid #22324a;
+    border-top-color: var(--primary);
+    border-radius: 50%;
+}
+
+.score-ring span {
+    color: #fff;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.score-ring small {
+    color: var(--text-secondary);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.score-content p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.ai-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #4ade80;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.online {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 10px rgba(34, 197, 94, .8);
+}
+
+.ai-message {
+    display: flex;
+    gap: 14px;
+    padding: 15px;
+    border: 1px solid rgba(59, 130, 246, .25);
+    border-radius: 14px;
+    background: rgba(59, 130, 246, .07);
+}
+
+.ai-avatar {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+}
+
+.ai-message p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.ai-greeting {
+    color: #fff !important;
+    font-weight: 700;
+    margin-bottom: 4px !important;
+}
+
+.ai-insights {
+    display: grid;
+    gap: 11px;
+    margin-top: 18px;
+}
+
+.ai-insights div {
+    display: flex;
+    gap: 9px;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.ai-insights i {
+    color: #4ade80;
+}
+
+.ai-insights div:last-child i {
+    color: #fbbf24;
+}
+
+.atlas-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.atlas-table th {
+    padding: 0 12px 13px;
+    color: #71829a;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.atlas-table td {
+    padding: 16px 12px;
+    border-top: 1px solid rgba(39, 52, 73, .75);
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.table-empty-state td {
+    padding: 40px 12px;
+    color: #71829a;
+    text-align: center;
+}
+
+.table-empty-state i {
+    margin-right: 8px;
+    color: var(--primary);
+}
+
+.dashboard-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 2px 0;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.dashboard-footer span:first-child {
+    color: #4ade80;
+}
+
+.dashboard-footer i {
+    font-size: 7px;
+}
