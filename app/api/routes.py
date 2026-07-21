@@ -7,7 +7,7 @@ from app.services.history_service import HistoryService
 from app.services.market_service import MarketService
 from app.services.okx_service import OKXService
 from app.services.portfolio_service import PortfolioService
-
+from app.services.timeline_service import TimelineService
 
 router = APIRouter()
 
@@ -99,3 +99,14 @@ def health():
     health_service = HealthService()
 
     return health_service.status_geral()
+
+
+@router.get("/timeline")
+def timeline():
+    timeline_service = TimelineService()
+
+    timeline_service.criar_eventos_iniciais()
+
+    return {
+        "events": timeline_service.listar_eventos(),
+    }

@@ -1,5 +1,6 @@
-const missionClock = document.getElementById("mission-clock");
+const MISSION_REFRESH_INTERVAL = 30000;
 
+const missionClock = document.getElementById("mission-clock");
 const missionTitle = document.getElementById("mission-title");
 const missionDescription = document.getElementById("mission-description");
 const missionOverallStatus = document.getElementById("mission-overall-status");
@@ -8,11 +9,10 @@ const missionApiStatus = document.getElementById("mission-api-status");
 const missionDatabaseStatus = document.getElementById("mission-database-status");
 const missionOkxStatus = document.getElementById("mission-okx-status");
 const missionAiStatus = document.getElementById("mission-ai-status");
-
 const missionSnapshots = document.getElementById("mission-snapshots");
+
 const missionTimeline = document.getElementById("mission-timeline");
 const missionLastUpdate = document.getElementById("mission-last-update");
-
 
 function updateClock() {
     if (missionClock) {
@@ -20,119 +20,171 @@ function updateClock() {
     }
 }
 
+function setStatus(element, online) {
+    if (!element) {
+        return;
+    }
 
-function serviceStatusElement(element, online) {
+    element.classList.remove("online", "offline");
+    element.classList.add(online ? "online" : "offline");
     element.textContent = online ? "Online" : "Indisponível";
-    element.className = `service-status ${online ? "online" : "offline"}`;
 }
 
+function formatTime(dateValue) {
+    const date = new Date(dateValue);
 
-function createTimelineItem(title, description, online) {
-    return `
-        <article class="mission-timeline-item">
-            <span class="timeline-dot ${online ? "online" : "offline"}"></span>
+    if (Number.isNaN(date.getTime())) {
+        return "--:--:--";
+    }
 
-            <div>
-                <strong>${title}</strong>
-                <p>${description}</p>
-            </div>
-        </article>
-    `;
+    return date.toLocaleTimeString("pt-BR");
 }
 
+function sourceName(source) {
+    const names = {
+        atlas: "Atlas OS",
+        api: "API FastAPI",
+        database: "Banco de dados",
+        okx: "Conexão OKX",
+        ai: "Atlas AI",
+    };
 
-function renderHealth(data) {
-    const apiOnline = Boolean(data.api?.online);
-    const databaseOnline = Boolean(data.database?.online);
-    const okxOnline = Boolean(data.okx?.online);
-    const aiOnline = Boolean(data.atlas_ai?.online);
-
-    const allOnline = apiOnline && databaseOnline && okxOnline && aiOnline;
-
-    serviceStatusElement(missionApiStatus, apiOnline);
-    serviceStatusElement(missionDatabaseStatus, databaseOnline);
-    serviceStatusElement(missionOkxStatus, okxOnline);
-    serviceStatusElement(missionAiStatus, aiOnline);
-
-    missionSnapshots.textContent = data.database?.snapshots || 0;
-
-    missionOverallStatus.textContent = allOnline
-        ? "SISTEMA ONLINE"
-        : "ATENÇÃO NECESSÁRIA";
-
-    missionOverallStatus.className =
-        `mission-overall-status ${allOnline ? "online" : "offline"}`;
-
-    missionTitle.textContent = allOnline
-        ? "Todos os serviços essenciais estão online"
-        : "Um ou mais serviços precisam de atenção";
-
-    missionDescription.textContent = allOnline
-        ? "A infraestrutura local, Atlas AI e conexão de leitura com a OKX estão funcionando."
-        : "Verifique os serviços indicados como indisponíveis antes de continuar.";
-
-    missionTimeline.innerHTML = [
-        createTimelineItem(
-            "API FastAPI",
-            apiOnline
-                ? "Rotas e interface respondendo normalmente."
-                : "A API não respondeu à verificação.",
-            apiOnline
-        ),
-        createTimelineItem(
-            "Banco de dados",
-            databaseOnline
-                ? `${data.database?.snapshots || 0} snapshots disponíveis no histórico local.`
-                : "Não foi possível consultar o banco local.",
-            databaseOnline
-        ),
-        createTimelineItem(
-            "Conexão OKX",
-            okxOnline
-                ? "Leitura da Trading Account autorizada e disponível."
-                : "Não foi possível consultar a conexão com a OKX.",
-            okxOnline
-        ),
-        createTimelineItem(
-            "Atlas AI",
-            aiOnline
-                ? "Módulo de análise operacional disponível."
-                : "O módulo Atlas AI não está disponível.",
-            aiOnline
-        ),
-    ].join("");
-
-    missionLastUpdate.textContent =
-        `Atualizado às ${new Date().toLocaleTimeString("pt-BR")}`;
+    return names[source] || "Sistema";
 }
 
+function renderTimeline(events) {
+    if (!missionTimeline) {
+        return;
+    }
 
-async function loadMissionControl() {
-    try {
-        const response = await fetch("/health");
+    missionTimeline.replaceChildren();
 
-        if (!response.ok) {
-            throw new Error("Não foi possível verificar a infraestrutura.");
-        }
+    if (!events || events.length === 0) {
+        const emptyState = document.createElement("div");
+        emptyState.className = "mission-loading";
+        emptyState.textContent = "Nenhum evento registrado ainda.";
+        missionTimeline.appendChild(emptyState);
+        return;
+    }
 
-        const data = await response.json();
+    events.forEach((event) => {
+        const item = document.createElement("article");
+        item.className = `mission-event mission-event-${event.level || "info"}`;
 
-        renderHealth(data);
-    } catch (error) {
-        console.error(error);
+        const dot = document.createElement("span");
+        dot.className = "mission-event-dot";
 
-        missionTitle.textContent = "Não foi possível consultar a infraestrutura";
-        missionDescription.textContent =
-            "A verificação local do Mission Control falhou.";
+        const content = document.createElement("div");
+        content.className = "mission-event-content";
 
-        missionOverallStatus.textContent = "INDISPONÍVEL";
-        missionOverallStatus.className = "mission-overall-status offline";
+        const title = document.createElement("strong");
+        title.textContent = event.title;
+
+        const description = document.createElement("p");
+        description.textContent = event.description;
+
+        const metadata = document.createElement("small");
+        metadata.textContent =
+            `${sourceName(event.source)} · ${formatTime(event.created_at)}`;
+
+        content.append(title, description, metadata);
+        item.append(dot, content);
+        missionTimeline.appendChild(item);
+    });
+}
+
+function updateOverallStatus(health) {
+    const services = [
+        health.api?.online,
+        health.database?.online,
+        health.okx?.online,
+        health.atlas_ai?.online,
+    ];
+
+    const allOnline = services.every(Boolean);
+
+    if (missionOverallStatus) {
+        missionOverallStatus.textContent = allOnline
+            ? "SISTEMA ONLINE"
+            : "ATENÇÃO";
+
+        missionOverallStatus.classList.toggle("online", allOnline);
+        missionOverallStatus.classList.toggle("offline", !allOnline);
+    }
+
+    if (missionTitle) {
+        missionTitle.textContent = allOnline
+            ? "Todos os serviços essenciais estão online"
+            : "Um ou mais serviços precisam de atenção";
+    }
+
+    if (missionDescription) {
+        missionDescription.textContent = allOnline
+            ? "A infraestrutura local, Atlas AI e conexão de leitura com a OKX estão funcionando."
+            : "O Atlas continua em modo informativo. Verifique os serviços destacados abaixo.";
     }
 }
 
+async function fetchJson(url) {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`Não foi possível carregar ${url}.`);
+    }
+
+    return response.json();
+}
+
+async function updateMissionControl() {
+    try {
+        const [health, timeline] = await Promise.all([
+            fetchJson("/health"),
+            fetchJson("/timeline"),
+        ]);
+
+        setStatus(missionApiStatus, Boolean(health.api?.online));
+        setStatus(missionDatabaseStatus, Boolean(health.database?.online));
+        setStatus(missionOkxStatus, Boolean(health.okx?.online));
+        setStatus(missionAiStatus, Boolean(health.atlas_ai?.online));
+
+        if (missionSnapshots) {
+            missionSnapshots.textContent = health.database?.snapshots ?? "0";
+        }
+
+        updateOverallStatus(health);
+        renderTimeline(timeline.events);
+
+        if (missionLastUpdate) {
+            missionLastUpdate.textContent =
+                `Atualizado às ${new Date().toLocaleTimeString("pt-BR")}`;
+        }
+    } catch (error) {
+        console.error("Erro ao atualizar Mission Control:", error);
+
+        setStatus(missionApiStatus, false);
+        setStatus(missionDatabaseStatus, false);
+        setStatus(missionOkxStatus, false);
+        setStatus(missionAiStatus, false);
+
+        if (missionTitle) {
+            missionTitle.textContent = "Não foi possível atualizar a infraestrutura";
+        }
+
+        if (missionDescription) {
+            missionDescription.textContent =
+                "A tela permanece informativa; tente atualizar novamente em instantes.";
+        }
+
+        if (missionOverallStatus) {
+            missionOverallStatus.textContent = "OFFLINE";
+            missionOverallStatus.classList.remove("online");
+            missionOverallStatus.classList.add("offline");
+        }
+    }
+}
 
 updateClock();
-setInterval(updateClock, 1000);
+updateMissionControl();
 
-loadMissionControl();
-setInterval(loadMissionControl, 30000);
+setInterval(updateClock, 1000);
+setInterval(updateMissionControl, MISSION_REFRESH_INTERVAL);

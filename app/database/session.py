@@ -5,7 +5,7 @@ from app.core.config import settings
 from app.models.base import Base
 from app.models.equity_snapshot import EquitySnapshot
 from app.models.settings import Settings as DatabaseSettings
-
+from app.models.system_event import SystemEvent
 
 engine = create_engine(
     settings.DATABASE_URL,

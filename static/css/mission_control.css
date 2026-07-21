@@ -206,3 +206,68 @@
         grid-template-columns: 1fr;
     }
 }
+
+.mission-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.mission-event {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: rgba(7, 15, 29, 0.3);
+}
+
+.mission-event-dot {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
+    margin-top: 5px;
+    border-radius: 50%;
+    background: #65a0ff;
+    box-shadow: 0 0 12px rgba(101, 160, 255, 0.75);
+}
+
+.mission-event-success .mission-event-dot {
+    background: #31df88;
+    box-shadow: 0 0 12px rgba(49, 223, 136, 0.75);
+}
+
+.mission-event-warning .mission-event-dot {
+    background: #f5b943;
+    box-shadow: 0 0 12px rgba(245, 185, 67, 0.75);
+}
+
+.mission-event-danger .mission-event-dot {
+    background: #fa6580;
+    box-shadow: 0 0 12px rgba(250, 101, 128, 0.75);
+}
+
+.mission-event-content {
+    min-width: 0;
+}
+
+.mission-event-content strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.mission-event-content p {
+    margin: 0 0 6px;
+    color: #8eb4de;
+    font-size: 13px;
+}
+
+.mission-event-content small {
+    color: #6f9fd2;
+    font-size: 11px;
+    font-weight: 700;
+}
