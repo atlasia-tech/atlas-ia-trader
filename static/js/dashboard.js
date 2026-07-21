@@ -14,8 +14,8 @@ const chartPanelTitle = document.querySelector(".chart-panel h3");
 const chartEmptyState = document.querySelector(".chart-empty-state");
 const chartAction = document.querySelector(".chart-panel .panel-action");
 const scoreRing = document.querySelector(".score-ring");
-const scoreValue = document.querySelector(".score-ring span");
-const scoreStatus = document.querySelector(".score-ring small");
+const scoreValue = document.getElementById("dashboard-score-value");
+const scoreStatus = document.getElementById("dashboard-score-label");
 const scoreDescription = document.querySelector(".score-content p");
 
 let equityChart = null;
