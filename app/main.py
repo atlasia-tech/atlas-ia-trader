@@ -96,3 +96,20 @@ def mission_control(request: Request):
         name="mission_control.html",
         context={"request": request},
     )
+
+
+@app.get("/estrategias", response_class=HTMLResponse)
+def estrategias(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="strategies.html",
+        context={"request": request},
+    )
+
+@app.get("/configuracoes", response_class=HTMLResponse)
+def configuracoes(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="settings.html",
+        context={"request": request},
+    )

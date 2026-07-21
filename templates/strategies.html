@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estratégias | Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>ATLAS</strong>
+                        <span>OPERATING SYSTEM</span>
+                    </div>
+                </div>
+
+                <nav class="menu">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="/operacoes">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Operações</span>
+                    </a>
+
+                    <a href="/mercados">
+                        <i class="bi bi-activity"></i>
+                        <span>Mercado</span>
+                    </a>
+
+                    <a href="/atlas-ai">
+                        <i class="bi bi-stars"></i>
+                        <span>Atlas AI</span>
+                    </a>
+
+                    <a href="/atlas-ai">
+                        <i class="bi bi-award-fill"></i>
+                        <span>Atlas Score</span>
+                    </a>
+
+                    <a href="/estrategias" class="active">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        <span>Estratégias</span>
+                    </a>
+
+                    <a href="/analytics">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        <span>Analytics</span>
+                    </a>
+
+                    <a href="/risco">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Gestão de risco</span>
+                    </a>
+
+                    <a href="/mission-control">
+                        <i class="bi bi-cpu-fill"></i>
+                        <span>Mission Control</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-status">
+                <span class="status-dot"></span>
+                <span>Atlas Core online</span>
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">ARQUITETURA OPERACIONAL</p>
+                    <h1>Estratégias</h1>
+                    <p class="page-subtitle">
+                        Acompanhamento informativo das estratégias monitoradas.
+                    </p>
+                </div>
+
+                <div class="header-status">
+                    <span><i></i> OKX</span>
+                    <span><i></i> API</span>
+                    <span><i></i> IA</span>
+                    <time id="atlas-clock">--:--:--</time>
+                </div>
+            </header>
+
+            <section class="content strategies-page">
+                <article class="strategy-hero panel">
+                    <div class="strategy-hero-icon">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                    </div>
+
+                    <div class="strategy-hero-copy">
+                        <p class="eyebrow">ESTRATÉGIA MONITORADA</p>
+                        <h2>HFT Crypto</h2>
+                        <p>
+                            Monitoramento de posições abertas na Trading Account da OKX.
+                            O Atlas apenas lê e organiza dados — nenhuma ordem é enviada.
+                        </p>
+                    </div>
+
+                    <div class="strategy-hero-status">
+                        <span class="status-badge status-badge-info">
+                            <i class="bi bi-eye-fill"></i>
+                            Modo leitura
+                        </span>
+                    </div>
+                </article>
+
+                <section class="strategy-summary-grid">
+                    <article class="metric-card">
+                        <div class="metric-card-icon icon-blue">
+                            <i class="bi bi-layers-fill"></i>
+                        </div>
+                        <p>POSIÇÕES MONITORADAS</p>
+                        <strong id="strategy-total-positions">—</strong>
+                        <span>Dados da Trading Account</span>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-card-icon icon-green">
+                            <i class="bi bi-arrow-up-right"></i>
+                        </div>
+                        <p>POSIÇÕES LONG</p>
+                        <strong id="strategy-longs">—</strong>
+                        <span>Exposição comprada</span>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-card-icon icon-red">
+                            <i class="bi bi-arrow-down-right"></i>
+                        </div>
+                        <p>POSIÇÕES SHORT</p>
+                        <strong id="strategy-shorts">—</strong>
+                        <span>Exposição vendida</span>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-card-icon icon-amber">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <p>NÍVEL DE RISCO</p>
+                        <strong id="strategy-risk">—</strong>
+                        <span>Avaliação informativa</span>
+                    </article>
+                </section>
+
+                <section class="strategy-grid">
+                    <article class="panel strategy-detail-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="eyebrow">CONFIGURAÇÃO ATUAL</p>
+                                <h2>Perfil da estratégia</h2>
+                            </div>
+
+                            <span class="status-badge status-badge-success">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Monitorada
+                            </span>
+                        </div>
+
+                        <div class="strategy-properties">
+                            <div class="strategy-property">
+                                <span>Tipo</span>
+                                <strong>HFT Crypto</strong>
+                            </div>
+
+                            <div class="strategy-property">
+                                <span>Execução</span>
+                                <strong>Externa</strong>
+                            </div>
+
+                            <div class="strategy-property">
+                                <span>Conexão</span>
+                                <strong>OKX · Leitura</strong>
+                            </div>
+
+                            <div class="strategy-property">
+                                <span>Atualização</span>
+                                <strong>20 segundos</strong>
+                            </div>
+                        </div>
+
+                        <div class="strategy-note">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <p>
+                                Os dados mostrados refletem a conta conectada. A execução
+                                de operações permanece fora do Atlas OS nesta versão.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="panel strategy-health-panel">
+                        <p class="eyebrow">SAÚDE DA ESTRATÉGIA</p>
+                        <h2>Diagnóstico operacional</h2>
+
+                        <div class="strategy-score-wrap">
+                            <div class="strategy-score-ring" id="strategy-score-ring">
+                                <strong id="strategy-score">--</strong>
+                                <small id="strategy-score-status">CARREGANDO</small>
+                            </div>
+                        </div>
+
+                        <p class="strategy-health-text" id="strategy-health-text">
+                            Carregando dados de análise...
+                        </p>
+                    </article>
+                </section>
+
+                <article class="panel strategy-roadmap">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">PRÓXIMAS EVOLUÇÕES</p>
+                            <h2>Biblioteca de estratégias</h2>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-grid">
+                        <div class="roadmap-item roadmap-current">
+                            <span>01</span>
+                            <div>
+                                <strong>HFT Crypto</strong>
+                                <p>Monitoramento ativo da estratégia atual.</p>
+                            </div>
+                        </div>
+
+                        <div class="roadmap-item">
+                            <span>02</span>
+                            <div>
+                                <strong>Backtesting</strong>
+                                <p>Validação histórica antes de qualquer uso operacional.</p>
+                            </div>
+                        </div>
+
+                        <div class="roadmap-item">
+                            <span>03</span>
+                            <div>
+                                <strong>Simulador</strong>
+                                <p>Comparação de cenários sem enviar ordens.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <footer class="page-footer">
+                    <span>
+                        <i class="bi bi-circle-fill"></i>
+                        Estratégia em modo exclusivamente informativo
+                    </span>
+
+                    <span id="strategies-last-update">
+                        Última atualização: aguardando dados
+                    </span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/strategies.js"></script>
+</body>
+</html>
