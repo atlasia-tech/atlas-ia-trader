@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mission Control | Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-mark">
+                        <i class="bi bi-triangle-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>ATLAS</strong>
+                        <span>OPERATING SYSTEM</span>
+                    </div>
+                </div>
+
+                <nav class="menu">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        Dashboard
+                    </a>
+
+                    <a href="/operacoes">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Operações
+                    </a>
+
+                    <a href="/mercados">
+                        <i class="bi bi-activity"></i>
+                        Mercado
+                    </a>
+
+                    <a href="/atlas-ai">
+                        <i class="bi bi-stars"></i>
+                        Atlas AI
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-award-fill"></i>
+                        Atlas Score
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        Estratégias
+                    </a>
+
+                    <a href="/analytics">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        Analytics
+                    </a>
+
+                    <a href="/risco">
+                        <i class="bi bi-shield-check"></i>
+                        Gestão de risco
+                    </a>
+
+                    <a href="/mission-control" class="active">
+                        <i class="bi bi-cpu-fill"></i>
+                        Mission Control
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-online">
+                    <span></span>
+                    Atlas Core online
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <span class="eyebrow">INFRAESTRUTURA OPERACIONAL</span>
+                    <h1>Mission Control</h1>
+                    <p>Monitoramento dos serviços essenciais do Atlas OS.</p>
+                </div>
+
+                <div class="topbar-status">
+                    <span><i></i> OKX</span>
+                    <span><i></i> API</span>
+                    <span><i></i> IA</span>
+
+                    <div class="clock">
+                        <i class="bi bi-clock"></i>
+                        <span id="mission-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content">
+                <section class="panel mission-hero">
+                    <div class="mission-hero-icon">
+                        <i class="bi bi-broadcast-pin"></i>
+                    </div>
+
+                    <div>
+                        <span class="eyebrow">STATUS GERAL</span>
+                        <h2 id="mission-title">Verificando infraestrutura...</h2>
+                        <p id="mission-description">
+                            Consultando os serviços do Atlas OS.
+                        </p>
+                    </div>
+
+                    <span id="mission-overall-status" class="mission-overall-status">
+                        VERIFICANDO
+                    </span>
+                </section>
+
+                <div class="mission-grid">
+                    <article class="mission-service-card">
+                        <div class="mission-service-header">
+                            <span class="mission-service-icon api">
+                                <i class="bi bi-braces"></i>
+                            </span>
+
+                            <span id="mission-api-status" class="service-status">
+                                Verificando
+                            </span>
+                        </div>
+
+                        <h3>API FastAPI</h3>
+                        <p>Servidor responsável pelas rotas e pela interface do Atlas.</p>
+                    </article>
+
+                    <article class="mission-service-card">
+                        <div class="mission-service-header">
+                            <span class="mission-service-icon database">
+                                <i class="bi bi-database-fill"></i>
+                            </span>
+
+                            <span id="mission-database-status" class="service-status">
+                                Verificando
+                            </span>
+                        </div>
+
+                        <h3>Banco de dados</h3>
+                        <p>
+                            Histórico local:
+                            <strong id="mission-snapshots">--</strong> snapshots registrados.
+                        </p>
+                    </article>
+
+                    <article class="mission-service-card">
+                        <div class="mission-service-header">
+                            <span class="mission-service-icon exchange">
+                                <i class="bi bi-arrow-left-right"></i>
+                            </span>
+
+                            <span id="mission-okx-status" class="service-status">
+                                Verificando
+                            </span>
+                        </div>
+
+                        <h3>Conexão OKX</h3>
+                        <p>Canal de leitura das posições e do saldo da Trading Account.</p>
+                    </article>
+
+                    <article class="mission-service-card">
+                        <div class="mission-service-header">
+                            <span class="mission-service-icon ai">
+                                <i class="bi bi-stars"></i>
+                            </span>
+
+                            <span id="mission-ai-status" class="service-status">
+                                Verificando
+                            </span>
+                        </div>
+
+                        <h3>Atlas AI</h3>
+                        <p>Motor informativo de score, exposição e análise operacional.</p>
+                    </article>
+                </div>
+
+                <section class="panel mission-timeline-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">EVENTOS DO SISTEMA</span>
+                            <h2>Timeline operacional</h2>
+                        </div>
+
+                        <span id="mission-last-update" class="muted-text">
+                            Aguardando dados
+                        </span>
+                    </div>
+
+                    <div id="mission-timeline" class="mission-timeline">
+                        <div class="mission-loading">
+                            Carregando estado dos serviços...
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="page-footer">
+                    <span>
+                        <i></i>
+                        Monitoramento local e conexão de leitura com a OKX
+                    </span>
+
+                    <span>Atlas OS · Mission Control</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/mission_control.js"></script>
+</body>
+</html>

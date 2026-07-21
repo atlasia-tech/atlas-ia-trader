@@ -2,6 +2,7 @@ from fastapi import APIRouter
 
 from app.core.config import settings
 from app.services.analysis_service import AnalysisService
+from app.services.health_service import HealthService
 from app.services.history_service import HistoryService
 from app.services.market_service import MarketService
 from app.services.okx_service import OKXService
@@ -91,3 +92,10 @@ def mercado():
     return {
         "ativos": market_service.resumo_mercado(),
     }
+
+
+@router.get("/health")
+def health():
+    health_service = HealthService()
+
+    return health_service.status_geral()

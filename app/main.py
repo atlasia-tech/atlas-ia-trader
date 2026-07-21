@@ -87,3 +87,12 @@ def analytics(request: Request):
         name="analytics.html",
         context={"request": request},
     )
+
+
+@app.get("/mission-control", response_class=HTMLResponse)
+def mission_control(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="mission_control.html",
+        context={"request": request},
+    )
