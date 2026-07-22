@@ -1,0 +1,26 @@
+.coin-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.coin-icon {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    display: inline-block;
+    border-radius: 50%;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.coin-icon-fallback {
+    display: inline-grid;
+    place-items: center;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+}

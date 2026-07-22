@@ -19,14 +19,24 @@
 }
 
 .brand-mark {
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
     display: grid;
     place-items: center;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--primary), #7c3aed);
-    color: #fff;
+    overflow: hidden;
+    border: 1px solid rgba(84, 137, 255, .35);
+    border-radius: 13px;
+    background:
+        #0b1120
+        url("/static/img/atlas-logo.png")
+        center / cover
+        no-repeat;
     box-shadow: 0 10px 24px rgba(59, 130, 246, .28);
+}
+
+.brand-mark i {
+    display: none;
 }
 
 .brand strong,
@@ -35,8 +45,21 @@
 }
 
 .brand strong {
-    font-size: 19px;
-    letter-spacing: .12em;
+    width: 132px;
+    height: 24px;
+    font-size: 0;
+    line-height: 0;
+}
+
+.brand strong::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:
+        url("/static/img/atlas-wordmark.png")
+        center / contain
+        no-repeat;
 }
 
 .brand small {
@@ -77,7 +100,11 @@
 
 .menu a.active {
     color: #fff;
-    background: linear-gradient(90deg, rgba(59, 130, 246, .95), rgba(59, 130, 246, .68));
+    background: linear-gradient(
+        90deg,
+        rgba(59, 130, 246, .95),
+        rgba(59, 130, 246, .68)
+    );
     box-shadow: 0 10px 22px rgba(37, 99, 235, .22);
 }
 

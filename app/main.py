@@ -106,10 +106,20 @@ def estrategias(request: Request):
         context={"request": request},
     )
 
+
 @app.get("/configuracoes", response_class=HTMLResponse)
 def configuracoes(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="settings.html",
+        context={"request": request},
+    )
+
+
+@app.get("/alertas", response_class=HTMLResponse)
+def alertas(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="alerts.html",
         context={"request": request},
     )

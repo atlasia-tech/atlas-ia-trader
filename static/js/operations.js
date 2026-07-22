@@ -60,6 +60,15 @@ function getProfitClass(value) {
 }
 
 
+function getAssetMarkup(ativo) {
+    if (typeof coinNameMarkup === "function") {
+        return coinNameMarkup(ativo);
+    }
+
+    return `<strong>${ativo}</strong>`;
+}
+
+
 function renderOperations(items) {
     if (!positionsBody) {
         return;
@@ -84,7 +93,7 @@ function renderOperations(items) {
         return `
             <tr>
                 <td>
-                    <strong>${operation.ativo}</strong>
+                    ${getAssetMarkup(operation.ativo)}
                 </td>
 
                 <td>

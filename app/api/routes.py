@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.core.config import settings
+from app.services.alert_service import AlertService
 from app.services.analysis_service import AnalysisService
 from app.services.health_service import HealthService
 from app.services.history_service import HistoryService
@@ -74,6 +75,12 @@ def portfolio():
 def analysis():
     analysis_service = AnalysisService()
     return analysis_service.analisar()
+
+
+@router.get("/alerts")
+def alerts():
+    alert_service = AlertService()
+    return alert_service.listar_alertas()
 
 
 @router.get("/history")

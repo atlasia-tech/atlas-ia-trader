@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alertas | Atlas OS</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <aside class="sidebar">
+            <div>
+                <a class="brand" href="/">
+                    <div class="brand-mark">
+                        <img
+                            src="/static/img/atlas-logo.png"
+                            alt="Atlas IA"
+                        >
+                    </div>
+
+                    <div>
+                        <img
+                            class="brand-wordmark"
+                            src="/static/img/atlas-wordmark.png"
+                            alt="Atlas IA"
+                        >
+                        <small>Operating System</small>
+                    </div>
+                </a>
+
+                <nav class="menu">
+                    <a href="/">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="/operacoes">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Operações</span>
+                    </a>
+
+                    <a href="/mercados">
+                        <i class="bi bi-activity"></i>
+                        <span>Mercado</span>
+                    </a>
+
+                    <a href="/atlas-ai">
+                        <i class="bi bi-stars"></i>
+                        <span>Atlas AI</span>
+                    </a>
+
+                    <a href="/alertas" class="active">
+                        <i class="bi bi-bell-fill"></i>
+                        <span>Alertas</span>
+                    </a>
+
+                    <a href="/estrategias">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        <span>Estratégias</span>
+                    </a>
+
+                    <a href="/analytics">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        <span>Analytics</span>
+                    </a>
+
+                    <a href="/risco">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Gestão de risco</span>
+                    </a>
+
+                    <a href="/mission-control">
+                        <i class="bi bi-cpu-fill"></i>
+                        <span>Mission Control</span>
+                    </a>
+
+                    <a href="/configuracoes">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Configurações</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="status-dot online"></span>
+                    <span>Atlas Core online</span>
+                </div>
+
+                <small>Atlas OS · v0.2</small>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">MONITORAMENTO OPERACIONAL</p>
+                    <h1>Alertas</h1>
+                    <p>Leitura informativa das condições atuais da operação.</p>
+                </div>
+
+                <div class="topbar-status">
+                    <span><i class="status-dot online"></i> OKX</span>
+                    <span><i class="status-dot online"></i> API</span>
+                    <span><i class="status-dot online"></i> IA</span>
+
+                    <div class="clock-box">
+                        <i class="bi bi-clock-history"></i>
+                        <span id="alerts-clock">--:--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content alerts-page">
+                <article class="panel alerts-hero">
+                    <div class="alerts-hero-icon">
+                        <i class="bi bi-bell-fill"></i>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow">STATUS ATUAL</p>
+                        <h2 id="alerts-summary">Carregando alertas...</h2>
+                        <p id="alerts-description">
+                            O Atlas está consultando os dados informativos da operação.
+                        </p>
+                    </div>
+
+                    <span id="alerts-count" class="alerts-count">
+                        --
+                    </span>
+                </article>
+
+                <article class="panel alerts-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">CENTRAL DE ALERTAS</p>
+                            <h2>Condições monitoradas</h2>
+                        </div>
+
+                        <span id="alerts-last-update" class="panel-update">
+                            Aguardando dados
+                        </span>
+                    </div>
+
+                    <div id="alerts-list" class="alerts-list">
+                        <div class="alerts-loading">
+                            <i class="bi bi-arrow-repeat"></i>
+                            Carregando alertas da operação...
+                        </div>
+                    </div>
+                </article>
+
+                <footer class="page-footer">
+                    <span>
+                        <i class="status-dot online"></i>
+                        Alertas gerados em modo informativo
+                    </span>
+
+                    <span>Atlas OS · Alert Center</span>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/alerts.js"></script>
+</body>
+</html>

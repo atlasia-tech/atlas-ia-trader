@@ -3,6 +3,13 @@ const marketSummary = document.getElementById("market-summary");
 const marketClock = document.getElementById("market-clock");
 const marketLastUpdate = document.getElementById("market-last-update");
 
+const COIN_ICON_URLS = {
+    BTC: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/btc.png",
+    ETH: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/eth.png",
+    SOL: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/sol.png",
+    XRP: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/xrp.png",
+};
+
 
 function formatNumber(value, decimals = 2) {
     return new Intl.NumberFormat("pt-BR", {
@@ -31,7 +38,34 @@ function updateClock() {
 
 
 function getAssetName(ativo) {
-    return ativo.replace("-USDT-SWAP", "");
+    return String(ativo || "")
+        .replace("-USDT-SWAP", "")
+        .trim();
+}
+
+
+function getCoinIconMarkup(ativo) {
+    const symbol = getAssetName(ativo);
+    const iconUrl = COIN_ICON_URLS[symbol];
+
+    if (!iconUrl) {
+        return `
+            <span class="market-symbol-icon market-symbol-fallback">
+                ${symbol.slice(0, 1) || "?"}
+            </span>
+        `;
+    }
+
+    return `
+        <span class="market-symbol-icon">
+            <img
+                src="${iconUrl}"
+                alt="${symbol}"
+                title="${symbol}"
+                onerror="this.parentElement.innerHTML='${symbol.slice(0, 1) || "?"}'"
+            >
+        </span>
+    `;
 }
 
 
@@ -49,9 +83,7 @@ function renderMarketCards(ativos) {
             <article class="market-card">
                 <div class="market-card-header">
                     <div class="market-symbol">
-                        <span class="market-symbol-icon">
-                            <i class="bi bi-currency-bitcoin"></i>
-                        </span>
+                        ${getCoinIconMarkup(ativo.ativo)}
 
                         <div>
                             <strong>${getAssetName(ativo.ativo)}</strong>

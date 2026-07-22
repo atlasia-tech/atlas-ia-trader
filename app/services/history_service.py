@@ -4,6 +4,7 @@ from sqlalchemy import desc, select
 
 from app.database.session import SessionLocal
 from app.models.equity_snapshot import EquitySnapshot
+from app.services.timeline_service import TimelineService
 
 
 class HistoryService:
@@ -34,9 +35,16 @@ class HistoryService:
                 if segundos_desde_ultimo < 60:
                     return False
 
+            lucro_atual = float(portfolio["lucro_total"])
+            lucro_anterior = (
+                float(ultimo_snapshot.lucro_total)
+                if ultimo_snapshot
+                else None
+            )
+
             snapshot = EquitySnapshot(
                 patrimonio_total=float(patrimonio_total),
-                lucro_total=float(portfolio["lucro_total"]),
+                lucro_total=lucro_atual,
                 margem_utilizada=float(portfolio["margem_utilizada"]),
                 exposicao_total=float(portfolio["exposicao_total"]),
             )
@@ -44,10 +52,61 @@ class HistoryService:
             session.add(snapshot)
             session.commit()
 
+            self._registrar_evento_relevante(
+                lucro_anterior=lucro_anterior,
+                lucro_atual=lucro_atual,
+            )
+
             return True
 
         finally:
             session.close()
+
+    def _registrar_evento_relevante(
+        self,
+        lucro_anterior,
+        lucro_atual,
+    ):
+        timeline = TimelineService()
+
+        if lucro_anterior is None:
+            timeline.registrar_evento(
+                source="portfolio",
+                title="Histórico de patrimônio iniciado",
+                description=(
+                    f"Primeiro snapshot salvo com P/L em aberto de "
+                    f"US$ {lucro_atual:.2f}."
+                ),
+                level="info",
+            )
+            return
+
+        variacao = lucro_atual - lucro_anterior
+
+        if abs(variacao) < 0.50:
+            return
+
+        if variacao > 0:
+            timeline.registrar_evento(
+                source="portfolio",
+                title="Resultado aberto melhorou",
+                description=(
+                    f"O P/L em aberto variou +US$ {variacao:.2f}, "
+                    f"chegando a US$ {lucro_atual:.2f}."
+                ),
+                level="success",
+            )
+            return
+
+        timeline.registrar_evento(
+            source="portfolio",
+            title="Resultado aberto recuou",
+            description=(
+                f"O P/L em aberto variou US$ {variacao:.2f}, "
+                f"chegando a US$ {lucro_atual:.2f}."
+            ),
+            level="warning",
+        )
 
     def listar_snapshots(self, limite=120):
         session = SessionLocal()

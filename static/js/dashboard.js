@@ -5,6 +5,21 @@
 
 const REFRESH_INTERVAL_MS = 20000;
 
+const COIN_ICON_URLS = {
+    AAVE: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/aave.png",
+    APE: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/ape.png",
+    AVAX: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/avax.png",
+    BTC: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/btc.png",
+    DOGE: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/doge.png",
+    ETH: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/eth.png",
+    HBAR: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/hbar.png",
+    NEAR: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/near.png",
+    SAND: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/sand.png",
+    SOL: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/sol.png",
+    XLM: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/xlm.png",
+    XRP: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/xrp.png",
+};
+
 const clock = document.getElementById("atlas-clock");
 const lastUpdate = document.getElementById("last-update");
 const positionsTable = document.getElementById("positions-table-body");
@@ -20,6 +35,7 @@ const scoreDescription = document.querySelector(".score-content p");
 
 let equityChart = null;
 
+
 function formatNumber(value, decimals = 2) {
     return Number(value || 0).toLocaleString("pt-BR", {
         minimumFractionDigits: decimals,
@@ -27,8 +43,53 @@ function formatNumber(value, decimals = 2) {
     });
 }
 
+
+function getCoinSymbol(ativo) {
+    return String(ativo || "")
+        .toUpperCase()
+        .split("-")[0]
+        .trim();
+}
+
+
+function coinIconMarkup(ativo) {
+    const symbol = getCoinSymbol(ativo);
+    const iconUrl = COIN_ICON_URLS[symbol];
+
+    if (!iconUrl) {
+        return `
+            <span class="coin-icon coin-icon-fallback">
+                ${symbol.slice(0, 1) || "?"}
+            </span>
+        `;
+    }
+
+    return `
+        <img
+            class="coin-icon"
+            src="${iconUrl}"
+            alt="${symbol}"
+            title="${symbol}"
+            onerror="this.outerHTML='<span class=&quot;coin-icon coin-icon-fallback&quot;>${symbol.slice(0, 1)}</span>'"
+        >
+    `;
+}
+
+
+function coinNameMarkup(ativo) {
+    return `
+        <span class="coin-name">
+            ${coinIconMarkup(ativo)}
+            <strong>${ativo}</strong>
+        </span>
+    `;
+}
+
+
 function updateClock() {
-    if (!clock) return;
+    if (!clock) {
+        return;
+    }
 
     clock.textContent = new Intl.DateTimeFormat("pt-BR", {
         hour: "2-digit",
@@ -37,8 +98,11 @@ function updateClock() {
     }).format(new Date());
 }
 
+
 function updateLastRefresh() {
-    if (!lastUpdate) return;
+    if (!lastUpdate) {
+        return;
+    }
 
     const time = new Intl.DateTimeFormat("pt-BR", {
         hour: "2-digit",
@@ -49,6 +113,7 @@ function updateLastRefresh() {
     lastUpdate.textContent = `Última atualização: ${time}`;
 }
 
+
 function setMetricCard(position, value) {
     const cards = document.querySelectorAll(".metric-card");
     const title = cards[position]?.querySelector("h2");
@@ -58,8 +123,11 @@ function setMetricCard(position, value) {
     }
 }
 
+
 function updateMetrics(portfolio, analysis) {
-    if (!portfolio) return;
+    if (!portfolio) {
+        return;
+    }
 
     const lucro = Number(portfolio.lucro_total || 0);
     const patrimonio = Number(
@@ -84,12 +152,18 @@ function updateMetrics(portfolio, analysis) {
     }
 }
 
+
 function getPnlClass(value) {
-    return Number(value || 0) >= 0 ? "pnl-positive" : "pnl-negative";
+    return Number(value || 0) >= 0
+        ? "pnl-positive"
+        : "pnl-negative";
 }
 
+
 function renderPositions(operations) {
-    if (!positionsTable) return;
+    if (!positionsTable) {
+        return;
+    }
 
     if (!operations?.length) {
         positionsTable.innerHTML = `
@@ -106,21 +180,28 @@ function renderPositions(operations) {
     positionsTable.innerHTML = operations.map((operation) => {
         const pnl = Number(operation.lucro_prejuizo || 0);
         const roi = Number(operation.roi || 0);
-        const sideClass = operation.lado === "LONG" ? "side-long" : "side-short";
+        const sideClass = operation.lado === "LONG"
+            ? "side-long"
+            : "side-short";
 
         return `
             <tr>
-                <td><strong>${operation.ativo}</strong></td>
+                <td>${coinNameMarkup(operation.ativo)}</td>
+
                 <td>
                     <span class="side-badge ${sideClass}">
                         ${operation.lado}
                     </span>
                 </td>
+
                 <td>${formatNumber(operation.entrada, 4)}</td>
+
                 <td>${formatNumber(operation.preco_atual, 4)}</td>
+
                 <td class="${getPnlClass(pnl)}">
                     ${pnl >= 0 ? "+" : ""}${formatNumber(pnl, 4)}
                 </td>
+
                 <td class="${getPnlClass(roi)}">
                     ${roi >= 0 ? "+" : ""}${formatNumber(roi, 2)}%
                 </td>
@@ -128,6 +209,7 @@ function renderPositions(operations) {
         `;
     }).join("");
 }
+
 
 function renderScore(analysis) {
     if (!analysis?.analise || !scoreRing || !scoreValue || !scoreStatus) {
@@ -160,6 +242,7 @@ function renderScore(analysis) {
     }
 }
 
+
 function renderAnalysis(analysis) {
     const aiPanel = document.querySelector(".ai-panel");
 
@@ -175,29 +258,45 @@ function renderAnalysis(analysis) {
         message.textContent =
             `Score ${analise.atlas_score}/100: ${analise.status_score}. ` +
             `O risco atual é ${analise.risco.toLowerCase()}, com ` +
-            `${formatNumber(analise.percentual_margem)}% do patrimônio usado como margem.`;
+            `${formatNumber(analise.percentual_margem)}% do patrimônio ` +
+            `usado como margem.`;
     }
 
     if (insights) {
         insights.innerHTML = `
             <div>
                 <i class="bi bi-check-circle-fill"></i>
-                <span>${resumo.total_posicoes} posições monitoradas; ${resumo.longs} long e ${resumo.shorts} short.</span>
+                <span>
+                    ${resumo.total_posicoes} posições monitoradas;
+                    ${resumo.longs} long e ${resumo.shorts} short.
+                </span>
             </div>
+
             <div>
                 <i class="bi bi-pie-chart-fill"></i>
-                <span>Exposição atual: ${formatNumber(analise.percentual_exposicao)}% do patrimônio.</span>
+                <span>
+                    Exposição atual:
+                    ${formatNumber(analise.percentual_exposicao)}%
+                    do patrimônio.
+                </span>
             </div>
+
             <div>
                 <i class="bi bi-exclamation-triangle-fill"></i>
-                <span>Maior atenção: ${analise.maior_prejuizo?.ativo || "—"}.</span>
+                <span>
+                    Maior atenção:
+                    ${analise.maior_prejuizo?.ativo || "—"}.
+                </span>
             </div>
         `;
     }
 }
 
+
 function initializeChart() {
-    if (!chartCanvas || typeof Chart === "undefined") return;
+    if (!chartCanvas || typeof Chart === "undefined") {
+        return;
+    }
 
     equityChart = new Chart(chartCanvas, {
         type: "line",
@@ -226,7 +325,10 @@ function initializeChart() {
                 tooltip: {
                     callbacks: {
                         label(context) {
-                            return ` Patrimônio: US$ ${formatNumber(context.raw, 2)}`;
+                            return ` Patrimônio: US$ ${formatNumber(
+                                context.raw,
+                                2
+                            )}`;
                         },
                     },
                 },
@@ -257,8 +359,11 @@ function initializeChart() {
     });
 }
 
+
 function updateEquityChart(snapshots) {
-    if (!equityChart || !snapshots?.length) return;
+    if (!equityChart || !snapshots?.length) {
+        return;
+    }
 
     const labels = snapshots.map((snapshot) => {
         const date = new Date(snapshot.created_at);
@@ -294,6 +399,7 @@ function updateEquityChart(snapshots) {
     }
 }
 
+
 async function fetchJson(url) {
     const response = await fetch(url);
 
@@ -303,6 +409,7 @@ async function fetchJson(url) {
 
     return response.json();
 }
+
 
 async function refreshDashboard() {
     try {
@@ -328,6 +435,7 @@ async function refreshDashboard() {
         }
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeChart();

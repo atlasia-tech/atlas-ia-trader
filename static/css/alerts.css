@@ -1,0 +1,231 @@
+.sidebar .brand-mark {
+    overflow: hidden;
+}
+
+.sidebar .brand-mark img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.sidebar .brand-wordmark {
+    width: 130px;
+    max-height: 30px;
+    display: block;
+    object-fit: contain;
+}
+
+.alerts-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.alerts-hero {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-height: 132px;
+    padding: 28px 30px;
+}
+
+.alerts-hero h2 {
+    margin: 4px 0 8px;
+    font-size: 28px;
+}
+
+.alerts-hero p {
+    margin: 0;
+}
+
+.alerts-hero-icon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 58px;
+    border-radius: 18px;
+    color: #ffffff;
+    font-size: 25px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    box-shadow: 0 12px 26px rgba(245, 158, 11, 0.2);
+}
+
+.alerts-count {
+    margin-left: auto;
+    padding: 10px 14px;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    border-radius: 10px;
+    color: #8cb9ff;
+    background: rgba(59, 130, 246, 0.1);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.alerts-panel {
+    padding: 26px;
+}
+
+.alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.alert-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-height: 88px;
+    padding: 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background: rgba(9, 18, 33, 0.56);
+}
+
+.alert-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 40px;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+.alert-content {
+    width: 100%;
+}
+
+.alert-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 6px;
+}
+
+.alert-title-row strong {
+    color: var(--text);
+    font-size: 15px;
+}
+
+.alert-title-row span {
+    padding: 5px 9px;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.alert-content p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.alert-success {
+    border-color: rgba(41, 215, 124, 0.28);
+}
+
+.alert-success .alert-icon {
+    color: #29d77c;
+    background: rgba(41, 215, 124, 0.12);
+}
+
+.alert-success .alert-title-row span {
+    color: #29d77c;
+    background: rgba(41, 215, 124, 0.12);
+}
+
+.alert-warning {
+    border-color: rgba(245, 158, 11, 0.34);
+}
+
+.alert-warning .alert-icon {
+    color: #f6b93b;
+    background: rgba(245, 158, 11, 0.12);
+}
+
+.alert-warning .alert-title-row span {
+    color: #f6b93b;
+    background: rgba(245, 158, 11, 0.12);
+}
+
+.alert-danger {
+    border-color: rgba(255, 93, 115, 0.34);
+}
+
+.alert-danger .alert-icon {
+    color: #ff5d73;
+    background: rgba(255, 93, 115, 0.12);
+}
+
+.alert-danger .alert-title-row span {
+    color: #ff5d73;
+    background: rgba(255, 93, 115, 0.12);
+}
+
+.alert-info {
+    border-color: rgba(59, 130, 246, 0.28);
+}
+
+.alert-info .alert-icon {
+    color: #65a5ff;
+    background: rgba(59, 130, 246, 0.12);
+}
+
+.alert-info .alert-title-row span {
+    color: #65a5ff;
+    background: rgba(59, 130, 246, 0.12);
+}
+
+.alerts-loading,
+.alerts-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    gap: 10px;
+    border: 1px dashed var(--border-color);
+    border-radius: 14px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.alerts-loading i {
+    color: var(--primary);
+    animation: alerts-spin 1s linear infinite;
+}
+
+.alerts-error {
+    color: #ff8a9b;
+}
+
+@keyframes alerts-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 720px) {
+    .alerts-hero {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .alerts-count {
+        margin-left: 0;
+    }
+
+    .alert-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+}

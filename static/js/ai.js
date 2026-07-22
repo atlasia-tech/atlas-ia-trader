@@ -23,12 +23,134 @@ const aiExposureDetails = document.getElementById("ai-exposure-details");
 
 const aiLastUpdate = document.getElementById("ai-last-update");
 
+const COIN_ICON_URLS = {
+    AAVE: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/aave.png",
+    APE: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/ape.png",
+    AVAX: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/avax.png",
+    BTC: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/btc.png",
+    DOGE: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/doge.png",
+    ETH: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/eth.png",
+    NEAR: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/near.png",
+    SAND: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/sand.png",
+    SOL: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/sol.png",
+    XLM: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/xlm.png",
+    XRP: "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/xrp.png",
+};
+
 
 function formatNumber(value, decimals = 2) {
     return new Intl.NumberFormat("pt-BR", {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
     }).format(Number(value || 0));
+}
+
+
+function getCoinSymbol(ativo) {
+    return String(ativo || "")
+        .toUpperCase()
+        .split("-")[0]
+        .trim();
+}
+
+
+function hbarIconMarkup() {
+    return `
+        <svg
+            class="coin-icon"
+            viewBox="0 0 64 64"
+            role="img"
+            aria-label="HBAR"
+        >
+            <circle
+                cx="32"
+                cy="32"
+                r="30"
+                fill="#151922"
+                stroke="#384151"
+                stroke-width="2"
+            />
+
+            <path
+                d="M21 16V48"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="4"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M43 16V48"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="4"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M21 23H43"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="3"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M21 32H43"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="3"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M21 41H43"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="3"
+                stroke-linecap="round"
+            />
+        </svg>
+    `;
+}
+
+
+function coinIconMarkup(ativo) {
+    const symbol = getCoinSymbol(ativo);
+
+    if (symbol === "HBAR") {
+        return hbarIconMarkup();
+    }
+
+    const iconUrl = COIN_ICON_URLS[symbol];
+
+    if (iconUrl) {
+        return `
+            <img
+                class="coin-icon"
+                src="${iconUrl}"
+                alt="${symbol}"
+                title="${symbol}"
+                onerror="this.outerHTML='<span class=&quot;coin-icon coin-icon-fallback&quot;>${symbol.charAt(0)}</span>'"
+            >
+        `;
+    }
+
+    return `
+        <span class="coin-icon coin-icon-fallback">
+            ${symbol.charAt(0) || "?"}
+        </span>
+    `;
+}
+
+
+function coinNameMarkup(ativo) {
+    return `
+        <span class="coin-name">
+            ${coinIconMarkup(ativo)}
+            <span>${ativo || "Sem dados"}</span>
+        </span>
+    `;
 }
 
 
@@ -64,6 +186,7 @@ function renderAnalysis(data) {
 
     aiScore.textContent = score;
     aiScoreStatus.textContent = status;
+
     aiScoreRing.style.background =
         `conic-gradient(${scoreColor} ${score * 3.6}deg, #21334d 0deg)`;
 
@@ -104,17 +227,17 @@ function renderHighlights(analysis) {
     const worst = analysis.maior_prejuizo || {};
     const exposure = analysis.maior_exposicao || {};
 
-    aiBestAsset.textContent = best.ativo || "Sem dados";
+    aiBestAsset.innerHTML = coinNameMarkup(best.ativo);
     aiBestDetails.textContent =
-        `P/L: +${formatNumber(best.lucro_prejuizo)} USDT · `
+        `P/L: ${formatNumber(best.lucro_prejuizo)} USDT · `
         + `ROI: ${formatNumber(best.roi)}%`;
 
-    aiWorstAsset.textContent = worst.ativo || "Sem dados";
+    aiWorstAsset.innerHTML = coinNameMarkup(worst.ativo);
     aiWorstDetails.textContent =
         `P/L: ${formatNumber(worst.lucro_prejuizo)} USDT · `
         + `ROI: ${formatNumber(worst.roi)}%`;
 
-    aiExposureAsset.textContent = exposure.ativo || "Sem dados";
+    aiExposureAsset.innerHTML = coinNameMarkup(exposure.ativo);
     aiExposureDetails.textContent =
         `Exposição: US$ ${formatNumber(exposure.valor_notional)} · `
         + `Margem: US$ ${formatNumber(exposure.margem_inicial)}`;
